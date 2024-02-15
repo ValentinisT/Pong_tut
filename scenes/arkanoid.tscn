@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://begqau5pgt7v8"]
+
+[ext_resource type="Texture2D" uid="uid://kg7abemg0eu6" path="res://assets/blocks/Arcade - Arkanoid - Fields.png" id="1_eua3y"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_eua3y")
+centered = false
+hframes = 5
+vframes = 2
+frame = 5

@@ -5,10 +5,10 @@
 [ext_resource type="FontFile" uid="uid://cwd1tkm36irny" path="res://assets/pixel_font.ttf" id="2_4g85s"]
 [ext_resource type="Script" path="res://scenes/Player.gd" id="3_fpv7k"]
 [ext_resource type="Script" path="res://scenes/Ball.gd" id="4_18rf6"]
-[ext_resource type="Script" path="res://scenes/CPU.gd" id="4_btv15"]
+[ext_resource type="Texture2D" uid="uid://bv3y8gnd5c070" path="res://assets/blocks/PNG/58-Breakout-Tiles.png" id="5_31ov8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vks4v"]
-size = Vector2(20, 120)
+size = Vector2(19, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_croqj"]
 size = Vector2(10, 10)
@@ -30,7 +30,8 @@ centered = false
 script = ExtResource("2_2vu7i")
 
 [node name="Player" type="StaticBody2D" parent="."]
-position = Vector2(50, 324)
+position = Vector2(576, 582)
+rotation = 1.5708
 script = ExtResource("3_fpv7k")
 
 [node name="ColorRect" type="ColorRect" parent="Player"]
@@ -44,50 +45,22 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(10, 0)
-shape = SubResource("RectangleShape2D_vks4v")
-
-[node name="CPU" type="StaticBody2D" parent="."]
-position = Vector2(1082, 324)
-script = ExtResource("4_btv15")
-
-[node name="ColorRect" type="ColorRect" parent="CPU"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -60.0
-offset_right = 20.0
-offset_bottom = 60.0
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CPU"]
-position = Vector2(10, 0)
+position = Vector2(10.5, 0)
 shape = SubResource("RectangleShape2D_vks4v")
 
 [node name="Ball" type="CharacterBody2D" parent="."]
-position = Vector2(576, 324)
+position = Vector2(576, 569)
 collision_mask = 3
 script = ExtResource("4_18rf6")
 
-[node name="ColorRect" type="ColorRect" parent="Ball"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_31ov8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
 shape = SubResource("RectangleShape2D_croqj")
 
 [node name="Borders" type="StaticBody2D" parent="."]
-visible = false
 collision_layer = 2
 
 [node name="Top" type="CollisionShape2D" parent="Borders"]
@@ -122,6 +95,7 @@ theme_override_font_sizes/font_size = 50
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="CPUScore" type="Label" parent="Hud"]
 offset_left = 648.0
@@ -133,6 +107,7 @@ theme_override_font_sizes/font_size = 50
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="BallTimer" type="Timer" parent="."]
 one_shot = true
