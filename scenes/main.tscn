@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://bwgtrk8je4es6"]
+[gd_scene load_steps=11 format=3 uid="uid://bwgtrk8je4es6"]
 
-[ext_resource type="Texture2D" uid="uid://pucgh0qbmij" path="res://assets/Bg.png" id="1_nmwho"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="2_2vu7i"]
 [ext_resource type="FontFile" uid="uid://cwd1tkm36irny" path="res://assets/pixel_font.ttf" id="2_4g85s"]
 [ext_resource type="Script" path="res://scenes/Player.gd" id="3_fpv7k"]
 [ext_resource type="Script" path="res://scenes/Ball.gd" id="4_18rf6"]
-[ext_resource type="Texture2D" uid="uid://bv3y8gnd5c070" path="res://assets/blocks/PNG/58-Breakout-Tiles.png" id="5_31ov8"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_up18d"]
+load_path = "res://.godot/imported/Bg.png-ca5d2210484e197d86a976d02d289bc8.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vks4v"]
 size = Vector2(19, 120)
@@ -25,7 +26,7 @@ size = Vector2(64, 648)
 [node name="Main" type="Sprite2D"]
 texture_filter = 1
 position = Vector2(0, 1)
-texture = ExtResource("1_nmwho")
+texture = SubResource("CompressedTexture2D_up18d")
 centered = false
 script = ExtResource("2_2vu7i")
 
@@ -55,7 +56,6 @@ script = ExtResource("4_18rf6")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ball"]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("5_31ov8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
 shape = SubResource("RectangleShape2D_croqj")
