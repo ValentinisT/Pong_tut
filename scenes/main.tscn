@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://scenes/Ball.gd" id="4_18rf6"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_up18d"]
-load_path = "res://.godot/imported/Bg.png-ca5d2210484e197d86a976d02d289bc8.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vks4v"]
 size = Vector2(19, 120)

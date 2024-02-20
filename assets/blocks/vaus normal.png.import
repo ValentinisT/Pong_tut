@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwu3o1i871xbs"
-path="res://.godot/imported/Arcade - Arkanoid - Blocks & Backgrounds copia.png-c2c74c65ed40856f71b3581a3938042c.ctex"
+uid="uid://cq35nnt5vfjbp"
+path="res://.godot/imported/vaus normal.png-985932960de83ac0523265721de86230.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/blocks/Arcade - Arkanoid - Blocks & Backgrounds copia.png"
-dest_files=["res://.godot/imported/Arcade - Arkanoid - Blocks & Backgrounds copia.png-c2c74c65ed40856f71b3581a3938042c.ctex"]
+source_file="res://assets/blocks/vaus normal.png"
+dest_files=["res://.godot/imported/vaus normal.png-985932960de83ac0523265721de86230.ctex"]
 
 [params]
 
