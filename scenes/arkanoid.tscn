@@ -18,13 +18,15 @@ var normalblock = preload(\"res://scenes/block.tscn\")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in range(12):
-		var pos = 16 * 2.5 * i
-		var new_block = normalblock.instantiate()  # Instanciar el nodo
-		new_block.position.x = 350 + pos # Establecer la coordenada X deseada
-		new_block.position.y = 250  # Establecer la coordenada Y deseada
-		new_block.scale.x = 2.5
-		new_block.scale.y = 2.5
-		add_child(new_block)  # Agregar el nodo como hijo
+		for j in range(12):
+			var posX = 16 * 2.5 * i
+			var posY = 8 * 2.5 * j
+			var new_block = normalblock.instantiate()  # Instanciar el nodo
+			new_block.position.x = 355 + posX # Establecer la coordenada X deseada
+			new_block.position.y = 150 + posY  # Establecer la coordenada Y deseada
+			new_block.scale.x = 2.5
+			new_block.scale.y = 2.5
+			add_child(new_block)  # Agregar el nodo como hijo
 
 
 func _on_ball_timer_timeout():	

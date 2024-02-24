@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Velocidad de movimiento
 
-@export var speed: float = 2
+@export var speed: float = 1.5
 @onready var height: float = $CollisionShape2D.get_shape().height
 
 # Called when the node enters the scene tree for the first time.

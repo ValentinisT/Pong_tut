@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://cyhu6tt28d4lj"]
 
-[ext_resource type="Script" path="res://scripts/block.gd" id="1_objqx"]
+[ext_resource type="Script" path="res://scripts/block.gd" id="1_ysfju"]
 [ext_resource type="Texture2D" uid="uid://dntvisl8r4rwd" path="res://assets/blocks/normal-blocks.png" id="2_2tyio"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbchg"]
 size = Vector2(15, 7)
 
 [node name="block" type="StaticBody2D"]
-script = ExtResource("1_objqx")
+script = ExtResource("1_ysfju")
 
 [node name="blockSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_2tyio")
@@ -15,6 +15,5 @@ hframes = 8
 frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-2.5, -2.5)
 shape = SubResource("RectangleShape2D_wbchg")
