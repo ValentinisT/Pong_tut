@@ -7,6 +7,7 @@ var speed : int
 var dir : Vector2
 const MAX_Y_VECTOR : float = 0.6
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	win_size = get_viewport_rect().size
@@ -25,29 +26,35 @@ func _physics_process(delta):
 	if collision:
 		collider = collision.get_collider()
 		#if ball hits paddle
-		if collider == $"../Player" or collider == $"../CPU":
+		print(collider)
+		if collider == $"../Player":
 			speed += ACCEL
 			dir = new_direction(collider)
+			print(dir)
 		#if it hits a wall
 		else:
 			dir = dir.bounce(collision.get_normal())
+		if collider.has_method("hit"):
+			collider.hit()
 
 func random_direction():
 	var new_dir := Vector2()
-	new_dir.x = [1, -1].pick_random()
-	new_dir.y = randf_range(-1, 1)
+	new_dir.y = [1, -1].pick_random()
+	new_dir.x = randf_range(-1, 1)
 	return new_dir.normalized()
 
 func new_direction(collider):
-	var ball_y = position.y
-	var pad_y = collider.position.y
-	var dist = ball_y - pad_y
+	print("new_direction")
+	var ball_x = position.x
+	var pad_x = collider.position.x
+	var dist = ball_x - pad_x
 	var new_dir := Vector2()
 	
 	#flip the horizontal direction
-	if dir.x > 0:
-		new_dir.x = -1
+	if dir.y > 0:
+		new_dir.y = -1
 	else:
-		new_dir.x = 1
-	new_dir.y = (dist / (collider.p_height / 2)) * MAX_Y_VECTOR
+		new_dir.y = 1
+	new_dir.x = (dist / (collider.height / 2.75 )) * MAX_Y_VECTOR
+	print(new_dir.x)
 	return new_dir.normalized()

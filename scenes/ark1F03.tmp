@@ -1,35 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://begqau5pgt7v8"]
+[gd_scene load_steps=12 format=3 uid="uid://begqau5pgt7v8"]
 
 [ext_resource type="Texture2D" uid="uid://wgxyis0gfg53" path="res://assets/blocks/blue background.png" id="1_tci2a"]
 [ext_resource type="Texture2D" uid="uid://bljotj4cbtmtr" path="res://assets/blocks/Arcade---Arkanoid---Blocks-&-Backgrounds.png" id="2_8den4"]
 [ext_resource type="Texture2D" uid="uid://dcayl44jlqded" path="res://assets/blocks/puerta enemigo.png" id="4_punty"]
-[ext_resource type="Script" path="res://scripts/Player.gd" id="4_vat4l"]
-[ext_resource type="Script" path="res://scripts/Ball.gd" id="4_vrxww"]
+[ext_resource type="Script" path="res://scenes/Player.gd" id="4_vat4l"]
 [ext_resource type="Texture2D" uid="uid://cq35nnt5vfjbp" path="res://assets/blocks/vaus normal.png" id="5_ifetx"]
 [ext_resource type="Texture2D" uid="uid://fcqcjt1ef7d2" path="res://assets/blocks/ball.png" id="6_wje40"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eijgw"]
-
-[sub_resource type="GDScript" id="GDScript_jdus5"]
-script/source = "extends Node2D
-
-var normalblock = preload(\"res://scenes/block.tscn\")
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	for i in range(12):
-		var pos = 16 * 2.5 * i
-		var new_block = normalblock.instantiate()  # Instanciar el nodo
-		new_block.position.x = 350 + pos # Establecer la coordenada X deseada
-		new_block.position.y = 250  # Establecer la coordenada Y deseada
-		new_block.scale.x = 2.5
-		new_block.scale.y = 2.5
-		add_child(new_block)  # Agregar el nodo como hijo
-
-
-func _on_ball_timer_timeout():	
-	$Ball.new_ball()
-"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_me4wc"]
 size = Vector2(72, 618.094)
@@ -40,15 +18,11 @@ size = Vector2(667, 66.875)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wdqc4"]
 size = Vector2(667, 39)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mgm0p"]
-radius = 5.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rur3m"]
 height = 76.0
 
-[node name="arkanoid" type="Node2D"]
+[node name="main" type="Node2D"]
 material = SubResource("CanvasItemMaterial_eijgw")
-script = SubResource("GDScript_jdus5")
 metadata/_edit_lock_ = true
 
 [node name="blueBackGround" type="Sprite2D" parent="."]
@@ -108,23 +82,26 @@ texture = ExtResource("4_punty")
 vframes = 6
 metadata/_edit_lock_ = true
 
-[node name="Ball" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(557, 573)
-script = ExtResource("4_vrxww")
 
-[node name="BallSprite" type="Sprite2D" parent="Ball"]
+[node name="Ball" type="Sprite2D" parent="CharacterBody2D"]
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("6_wje40")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
-position = Vector2(-5, -5)
-shape = SubResource("CircleShape2D_mgm0p")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(569, 611)
 rotation = 1.5708
 script = ExtResource("4_vat4l")
+speed = null
 metadata/_edit_lock_ = true
+
+[node name="cuerpo fisico" type="Sprite2D" parent="Player"]
+position = Vector2(-22.9996, 33.4998)
+rotation = 3.14159
+scale = Vector2(6.25, 6.25)
+vframes = 6
+frame = 5
 
 [node name="VausNormal" type="Sprite2D" parent="Player"]
 position = Vector2(-22.9999, 10.0001)
@@ -135,11 +112,6 @@ vframes = 6
 frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+visible = false
 position = Vector2(-27.9999, 15.0001)
 shape = SubResource("CapsuleShape2D_rur3m")
-
-[node name="BallTimer" type="Timer" parent="."]
-one_shot = true
-autostart = true
-
-[connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
