@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var win_size : Vector2
 const START_SPEED : int = 500
-const ACCEL : int = 50
+const ACCEL : int = 5
 var speed : int
 var dir : Vector2
 const MAX_Y_VECTOR : float = 0.6
@@ -14,8 +14,8 @@ func _ready():
 
 func new_ball():
 	#randomize start position and direction
-	position.x = win_size.x / 2
-	position.y = randi_range(200, win_size.y - 200)
+	position.x = 557
+	position.y = 573
 	speed = START_SPEED
 	dir = random_direction()
 
@@ -56,5 +56,5 @@ func new_direction(collider):
 	else:
 		new_dir.y = 1
 	new_dir.x = (dist / (collider.height / 2.75 )) * MAX_Y_VECTOR
-	print(new_dir.x)
+	print(new_dir.x)	
 	return new_dir.normalized()

@@ -20,13 +20,13 @@ func _ready():
 	Global.level1()
 	print(Global.levelBlocks[0].size())
 	
-	for i in range(Global.levelBlocks.size()):		
-		for j in range(Global.levelBlocks[0].size()):			
-			var posX = 16 * 2.5 * j
-			var posY = 8 * 2.5 * i
+	for i in range(Global.levelBlocks.size() - 1):		
+		for j in range(Global.levelBlocks[0].size() - 1):			
+			var posX = 16 * 2.5 * i
+			var posY = 8 * 2.5 * j/i
 			var new_block = normalblock.instantiate()  # Instanciar el nodo
-			new_block.position.x = 335 + posX # Establecer la coordenada X deseada
-			new_block.position.y = 165 + posY  # Establecer la coordenada Y deseada
+			new_block.position.x = 355 + posX # Establecer la coordenada X deseada
+			new_block.position.y = 150 + posY  # Establecer la coordenada Y deseada
 			new_block.scale.x = 2.5
 			new_block.scale.y = 2.5
 			var sprite = new_block.get_node(\"blockSprite\")  # Obtener el nodo Sprite dentro de block.tscn

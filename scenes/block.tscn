@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cyhu6tt28d4lj"]
+[gd_scene load_steps=5 format=3 uid="uid://cyhu6tt28d4lj"]
 
 [ext_resource type="Script" path="res://scripts/block.gd" id="1_ysfju"]
-[ext_resource type="Texture2D" uid="uid://dntvisl8r4rwd" path="res://assets/blocks/normal-blocks.png" id="2_2tyio"]
+[ext_resource type="Texture2D" uid="uid://dntvisl8r4rwd" path="res://assets/blocks/normal-blocks.png" id="2_xd2qg"]
+[ext_resource type="Texture2D" uid="uid://yp4xxrt5jf1v" path="res://assets/blocks/special-blocks.png" id="3_7ptdh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbchg"]
 size = Vector2(15, 7)
@@ -10,9 +11,15 @@ size = Vector2(15, 7)
 script = ExtResource("1_ysfju")
 
 [node name="blockSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_2tyio")
+texture = ExtResource("2_xd2qg")
 hframes = 8
 frame = 4
+
+[node name="specialBlockSprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_7ptdh")
+hframes = 6
+vframes = 2
+frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.5, -2.5)
