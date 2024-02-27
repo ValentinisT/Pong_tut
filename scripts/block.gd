@@ -1,14 +1,11 @@
 extends StaticBody2D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+# Propiedad exportada que se puede modificar desde el editor de Godot
+@export var tipo: int:
+	get:
+		return tipo
+	set(value):
+		tipo = value
 
 func hit():
 	self.queue_free()
