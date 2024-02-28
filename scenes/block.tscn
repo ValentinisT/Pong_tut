@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyhu6tt28d4lj"]
+[gd_scene load_steps=9 format=3 uid="uid://dffx6fmopugok"]
 
 [ext_resource type="Script" path="res://scripts/block.gd" id="1_ysfju"]
 [ext_resource type="Texture2D" uid="uid://dntvisl8r4rwd" path="res://assets/blocks/normal-blocks.png" id="2_xd2qg"]
@@ -6,6 +6,62 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbchg"]
 size = Vector2(15, 7)
+
+[sub_resource type="Animation" id="Animation_tcg1s"]
+resource_name = "grey hit"
+length = 0.325
+step = 0.075
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("specialBlockSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_7luwd"]
+resource_name = "gold hit"
+length = 0.325
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("specialBlockSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_nki28"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("specialBlockSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_603na"]
+_data = {
+"RESET": SubResource("Animation_nki28"),
+"gold hit": SubResource("Animation_7luwd"),
+"grey hit": SubResource("Animation_tcg1s")
+}
 
 [node name="block" type="StaticBody2D"]
 script = ExtResource("1_ysfju")
@@ -19,9 +75,14 @@ frame = 4
 texture = ExtResource("3_7ptdh")
 hframes = 6
 vframes = 2
-frame = 6
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(-2.5, -2.5)
 shape = SubResource("RectangleShape2D_wbchg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_603na")
+}

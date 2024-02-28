@@ -30,7 +30,6 @@ func _physics_process(delta):
 		if collider == $"../Player":
 			speed += ACCEL
 			dir = new_direction(collider)
-			print(dir)
 		#if it hits a wall
 		else:
 			dir = dir.bounce(collision.get_normal())
@@ -44,7 +43,6 @@ func random_direction():
 	return new_dir.normalized()
 
 func new_direction(collider):
-	print("new_direction")
 	var ball_x = position.x
 	var pad_x = collider.position.x
 	var dist = ball_x - pad_x
@@ -56,5 +54,4 @@ func new_direction(collider):
 	else:
 		new_dir.y = 1
 	new_dir.x = (dist / (collider.height / 2.75 )) * MAX_Y_VECTOR
-	print(new_dir.x)	
 	return new_dir.normalized()

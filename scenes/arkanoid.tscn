@@ -17,7 +17,7 @@ var normalblock = preload(\"res://scenes/block.tscn\")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Global.level3()
+	Global.level2()
 	print(Global.levelBlocks)
 	
 	for i in range(Global.filas):
@@ -32,20 +32,24 @@ func _ready():
 			new_block.scale.x = 2.5
 			new_block.scale.y = 2.5
 			var sprite = new_block.get_node(\"blockSprite\")  # Obtener el nodo Sprite dentro de block.tscn
-			var specialSprite = new_block.get_node(\"specialBlockSprite\")					
+			var specialSprite = new_block.get_node(\"specialBlockSprite\")
 			add_child(new_block)  # Agregar el nodo como hijo
 			print(Global.levelBlocks[i][j])
+			new_block.tipo = 0
 			if Global.levelBlocks[i][j] > 7:
+				new_block.tipo = 1
+				new_block.vidas = 2
 				new_block.get_node(\"blockSprite\").hide()
 				new_block.get_node(\"specialBlockSprite\").show()
 				var val = 6
 				if Global.levelBlocks[i][j] == 9:
-					val = 0			
+					val = 0
+					new_block.tipo = 2
 				specialSprite.frame = val
 			else:
 				new_block.get_node(\"blockSprite\").show()
 				new_block.get_node(\"specialBlockSprite\").hide()
-				sprite.frame = Global.levelBlocks[i][j]			
+				sprite.frame = Global.levelBlocks[i][j]
 
 func _on_ball_timer_timeout():	
 	$Ball.new_ball()
@@ -145,6 +149,7 @@ shape = SubResource("CircleShape2D_mgm0p")
 z_index = 2
 position = Vector2(569, 611)
 rotation = 1.5708
+motion_mode = 1
 script = ExtResource("4_vat4l")
 metadata/_edit_lock_ = true
 
