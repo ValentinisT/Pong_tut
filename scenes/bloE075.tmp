@@ -112,7 +112,6 @@ vframes = 2
 frame = 1
 
 [node name="powerUpSprite" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(-2, -3)
 texture = ExtResource("4_stnek")
 hframes = 8

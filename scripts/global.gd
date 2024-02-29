@@ -5,10 +5,8 @@ extends Node
 var levelBlocks = []
 var filas = 22
 var columnas = 13
-var ROJO = 0; var AZUL = 1; var FUCSIA = 2; var AMARILLO = 3; var BLANCO = 4; var NARANJA = 5; var CELESTE = 6; var VERDE = 7; var GRIS = 8; var DORADO = 9
-
-
-
+var ROJO = 0; var AZUL = 1; var FUCSIA = 2; var AMARILLO = 3; var BLANCO = 4; 
+var NARANJA = 5; var CELESTE = 6; var VERDE = 7; var GRIS = 8; var DORADO = 9
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,7 +31,6 @@ func level2():
 	var blocks = [4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2]
 	var line = []
 	for i in range(blocks.size()-2):
-		print("line",line)
 		line.append(blocks[i])		
 		self.replace_line(i+2, line)
 	self.replace_line(0,-1)
@@ -59,12 +56,10 @@ func replace_line(fila: int, arrayOrNumero):
 			new_array.append(element)
 		while len(new_array) < 13:
 			new_array.append(-1)
-		print("new_array", new_array)
 		levelBlocks[fila] = new_array
 	elif arrayOrNumero is int:
 		for i in range(13):
 			new_array.append(arrayOrNumero)
-		print(new_array)
 		levelBlocks[fila] = new_array
 
 

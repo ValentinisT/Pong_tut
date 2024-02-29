@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://begqau5pgt7v8"]
+[gd_scene load_steps=15 format=3 uid="uid://begqau5pgt7v8"]
 
 [ext_resource type="Texture2D" uid="uid://wgxyis0gfg53" path="res://assets/blocks/blue background.png" id="1_tci2a"]
 [ext_resource type="Texture2D" uid="uid://bljotj4cbtmtr" path="res://assets/blocks/Arcade---Arkanoid---Blocks-&-Backgrounds.png" id="2_8den4"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://scripts/Ball.gd" id="4_vrxww"]
 [ext_resource type="Texture2D" uid="uid://cq35nnt5vfjbp" path="res://assets/blocks/vaus normal.png" id="5_ifetx"]
 [ext_resource type="Texture2D" uid="uid://fcqcjt1ef7d2" path="res://assets/blocks/ball.png" id="6_wje40"]
-[ext_resource type="PackedScene" uid="uid://dffx6fmopugok" path="res://scenes/block.tscn" id="8_8h1bn"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eijgw"]
 
@@ -20,6 +19,7 @@ var ball_timer_executed = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Global.level2()
+	print(Global.levelBlocks)
 	
 	for i in range(Global.filas):
 		for j in range(Global.columnas):
@@ -35,6 +35,7 @@ func _ready():
 			var sprite = new_block.get_node(\"blockSprite\")  # Obtener el nodo Sprite dentro de block.tscn
 			var specialSprite = new_block.get_node(\"specialBlockSprite\")
 			add_child(new_block)  # Agregar el nodo como hijo
+			print(Global.levelBlocks[i][j])
 			new_block.tipo = 0
 			if Global.levelBlocks[i][j] > 7:
 				new_block.tipo = 1
@@ -135,7 +136,7 @@ metadata/_edit_lock_ = true
 
 [node name="Ball" type="CharacterBody2D" parent="."]
 z_index = 1
-position = Vector2(563, 573)
+position = Vector2(557, 573)
 motion_mode = 1
 script = ExtResource("4_vrxww")
 
@@ -170,9 +171,5 @@ shape = SubResource("CapsuleShape2D_rur3m")
 [node name="BallTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
-
-[node name="block" parent="." instance=ExtResource("8_8h1bn")]
-position = Vector2(424, 560)
-scale = Vector2(2.5, 2.5)
 
 [connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]

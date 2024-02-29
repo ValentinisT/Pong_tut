@@ -13,9 +13,6 @@ func _ready():
 	win_size = get_viewport_rect().size
 
 func new_ball():
-	#randomize start position and direction
-	position.x = 557
-	position.y = 573
 	speed = START_SPEED
 	dir = random_direction()
 
@@ -26,7 +23,6 @@ func _physics_process(delta):
 	if collision:
 		collider = collision.get_collider()
 		#if ball hits paddle
-		print(collider)
 		if collider == $"../Player":
 			speed += ACCEL
 			dir = new_direction(collider)
@@ -38,8 +34,8 @@ func _physics_process(delta):
 
 func random_direction():
 	var new_dir := Vector2()
-	new_dir.y = [1, -1].pick_random()
-	new_dir.x = randf_range(-1, 1)
+	new_dir.y = -1
+	new_dir.x = 0.25
 	return new_dir.normalized()
 
 func new_direction(collider):

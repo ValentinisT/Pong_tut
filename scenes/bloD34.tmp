@@ -9,8 +9,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbchg"]
 size = Vector2(15, 7)
 
-[sub_resource type="Animation" id="Animation_nki28"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_tcg1s"]
+resource_name = "grey hit"
+length = 0.325
+step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -18,22 +20,10 @@ tracks/0/path = NodePath("specialBlockSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("powerUpSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
+"values": [7, 8, 9, 10, 11]
 }
 
 [sub_resource type="Animation" id="Animation_7luwd"]
@@ -53,10 +43,25 @@ tracks/0/keys = {
 "values": [1, 2, 3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_tcg1s"]
-resource_name = "grey hit"
+[sub_resource type="Animation" id="Animation_nki28"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("specialBlockSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_kplcu"]
+resource_name = "power up"
 length = 0.325
-step = 0.075
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -67,25 +72,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.075, 0.15, 0.225, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [7, 8, 9, 10, 11]
-}
-
-[sub_resource type="Animation" id="Animation_kplcu"]
-resource_name = "power up"
-length = 0.86
-loop_mode = 1
-step = 0.12
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("powerUpSprite:frame")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
+"values": [1, 2, 3, 4, 5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_603na"]
@@ -106,18 +93,17 @@ hframes = 8
 frame = 4
 
 [node name="specialBlockSprite" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("3_7ptdh")
 hframes = 6
 vframes = 2
 frame = 1
 
 [node name="powerUpSprite" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(-2, -3)
 texture = ExtResource("4_stnek")
 hframes = 8
 vframes = 9
-frame = 5
 
 [node name="Arcade-Arkanoid-Powerups" type="Sprite2D" parent="."]
 visible = false
