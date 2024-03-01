@@ -174,5 +174,6 @@ autostart = true
 [node name="block" parent="." instance=ExtResource("8_8h1bn")]
 position = Vector2(424, 560)
 scale = Vector2(2.5, 2.5)
+tipo = 0
 
 [connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
