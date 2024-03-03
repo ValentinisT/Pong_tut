@@ -19,7 +19,6 @@ func _ready():
 
 func level1():
 	var blocks = [-1,-1, 8, 0, 3, 1, 2, 7]
-	var block_count = blocks.size()
 	for i in range(filas):
 		for j in range(columnas):
 			if (i < blocks.size()):

@@ -17,7 +17,10 @@ func _physics_process(_delta):
 		var collision = move_and_collide(velocity)
 		if !$"..".ball_timer_executed and !collision:
 			$"../Ball".move_and_collide(velocity)
-		
-		
+		if collision:
+			var collider = collision.get_collider()
+			if collider and "tipo" in collider:
+				collider.queue_free()
+
 	if direction == Vector2.ZERO:
 		velocity = Vector2.ZERO

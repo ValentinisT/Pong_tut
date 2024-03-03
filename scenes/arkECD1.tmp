@@ -57,20 +57,18 @@ func _on_ball_timer_timeout():
 	$Ball.new_ball()
 
 func _on_vidas_agotadas(position):
-	randomize()  # Esto asegura que obtienes un número diferente cada vez que ejecutas el juego
-	var create_power_up = randi() % 2 # Genera un número aleatorio entre 0 y 99
-	if create_power_up == 1 :
-		var new_powerUp = powerUp.instantiate()  # Instanciar el nodo
-		new_powerUp.position.x = position.x
-		new_powerUp.position.y = position.y
-		new_powerUp.scale.x = 2.5
-		new_powerUp.scale.y = 2.5
-		new_powerUp.tipo = get_random_power_up()
-		add_child(new_powerUp)  # Agregar el nodo como hijo
+	var new_powerUp = powerUp.instantiate()  # Instanciar el nodo
+	new_powerUp.position.x = position.x
+	new_powerUp.position.y = position.y
+	new_powerUp.scale.x = 2.5
+	new_powerUp.scale.y = 2.5
+	new_powerUp.tipo = get_random_power_up()
+	add_child(new_powerUp)  # Agregar el nodo como hijo
 
 func get_random_power_up():
 	randomize()  # Esto asegura que obtienes un número diferente cada vez que ejecutas el juego
 	var numero = randi() % 6 # Genera un número aleatorio entre 0 y 99
+	print(numero)  # Imprime el número aleatorio
 	return numero
 "
 
@@ -153,7 +151,6 @@ metadata/_edit_lock_ = true
 
 [node name="Ball" type="CharacterBody2D" parent="."]
 light_mask = 4
-visibility_layer = 4
 z_index = 1
 position = Vector2(563, 573)
 motion_mode = 1
@@ -171,7 +168,6 @@ shape = SubResource("CircleShape2D_mgm0p")
 z_index = 2
 position = Vector2(569, 611)
 rotation = 1.5708
-disable_mode = 2
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1

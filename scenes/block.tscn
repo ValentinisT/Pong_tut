@@ -1,40 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://dffx6fmopugok"]
+[gd_scene load_steps=9 format=3 uid="uid://dffx6fmopugok"]
 
 [ext_resource type="Script" path="res://scripts/block.gd" id="1_ysfju"]
 [ext_resource type="Texture2D" uid="uid://dntvisl8r4rwd" path="res://assets/blocks/normal-blocks.png" id="2_xd2qg"]
 [ext_resource type="Texture2D" uid="uid://yp4xxrt5jf1v" path="res://assets/blocks/special-blocks.png" id="3_7ptdh"]
 [ext_resource type="Texture2D" uid="uid://db6sit55l320d" path="res://assets/blocks/Arcade - Arkanoid - Powerups.png" id="4_stnek"]
-[ext_resource type="Texture2D" uid="uid://dqn34d1glkb3a" path="res://assets/blocks/sombra power up.png" id="5_hycx1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wbchg"]
 size = Vector2(15, 7)
-
-[sub_resource type="Animation" id="Animation_nki28"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("specialBlockSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("powerUpSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
-}
 
 [sub_resource type="Animation" id="Animation_7luwd"]
 resource_name = "gold hit"
@@ -70,144 +42,10 @@ tracks/0/keys = {
 "values": [7, 8, 9, 10, 11]
 }
 
-[sub_resource type="Animation" id="Animation_kplcu"]
-resource_name = "slow pill"
-length = 0.96
-loop_mode = 1
-step = 0.12
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("powerUpSprite:frame")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-
-[sub_resource type="Animation" id="Animation_2js3v"]
-resource_name = "catch pill"
-length = 0.96
-loop_mode = 1
-step = 0.12
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("powerUpSprite:frame")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [8, 9, 10, 11, 12, 13, 14, 15]
-}
-
-[sub_resource type="Animation" id="Animation_wmw51"]
-resource_name = "Laser pill"
-length = 0.96
-loop_mode = 1
-step = 0.12
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("powerUpSprite:frame")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [16, 17, 18, 19, 20, 21, 22, 23]
-}
-
-[sub_resource type="Animation" id="Animation_0a1np"]
-resource_name = "Enlarge pill"
-length = 0.96
-loop_mode = 1
-step = 0.12
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("powerUpSprite:frame")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [24, 25, 26, 27, 28, 29, 30, 31]
-}
-
-[sub_resource type="Animation" id="Animation_k0tei"]
-resource_name = "Disruption pill"
-length = 0.96
-loop_mode = 1
-step = 0.12
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("powerUpSprite:frame")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [32, 33, 34, 35, 36, 37, 38, 39]
-}
-
-[sub_resource type="Animation" id="Animation_57p5v"]
-resource_name = "Break pill"
-length = 0.96
-loop_mode = 1
-step = 0.12
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("powerUpSprite:frame")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [40, 41, 42, 43, 44, 45, 46, 47]
-}
-
-[sub_resource type="Animation" id="Animation_vibr2"]
-resource_name = "Player pill"
-length = 0.96
-loop_mode = 1
-step = 0.12
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("powerUpSprite:frame")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [48, 49, 50, 51, 52, 53, 54, 55]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_603na"]
 _data = {
-"Break pill": SubResource("Animation_57p5v"),
-"Disruption pill": SubResource("Animation_k0tei"),
-"Enlarge pill": SubResource("Animation_0a1np"),
-"Laser pill": SubResource("Animation_wmw51"),
-"Player pill": SubResource("Animation_vibr2"),
-"RESET": SubResource("Animation_nki28"),
-"catch pill": SubResource("Animation_2js3v"),
 "gold hit": SubResource("Animation_7luwd"),
-"grey hit": SubResource("Animation_tcg1s"),
-"slow pill": SubResource("Animation_kplcu")
+"grey hit": SubResource("Animation_tcg1s")
 }
 
 [node name="block" type="StaticBody2D"]
@@ -251,12 +89,6 @@ position = Vector2(-2, -3)
 texture = ExtResource("4_stnek")
 hframes = 8
 vframes = 8
-frame = 5
-
-[node name="Arcade-Arkanoid-Powerups" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, -1)
-texture = ExtResource("5_hycx1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
