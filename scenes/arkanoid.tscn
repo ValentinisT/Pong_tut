@@ -1,12 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://begqau5pgt7v8"]
+[gd_scene load_steps=11 format=3 uid="uid://begqau5pgt7v8"]
 
 [ext_resource type="Texture2D" uid="uid://wgxyis0gfg53" path="res://assets/blocks/blue background.png" id="1_tci2a"]
 [ext_resource type="Texture2D" uid="uid://bljotj4cbtmtr" path="res://assets/blocks/Arcade---Arkanoid---Blocks-&-Backgrounds.png" id="2_8den4"]
 [ext_resource type="Texture2D" uid="uid://dcayl44jlqded" path="res://assets/blocks/puerta enemigo.png" id="4_punty"]
-[ext_resource type="Script" path="res://scripts/Player.gd" id="4_vat4l"]
-[ext_resource type="Script" path="res://scripts/Ball.gd" id="4_vrxww"]
-[ext_resource type="Texture2D" uid="uid://cq35nnt5vfjbp" path="res://assets/blocks/vaus normal.png" id="5_ifetx"]
-[ext_resource type="Texture2D" uid="uid://fcqcjt1ef7d2" path="res://assets/blocks/ball.png" id="6_wje40"]
+[ext_resource type="PackedScene" uid="uid://f3a1nh650365" path="res://scenes/player.tscn" id="5_sb2yb"]
+[ext_resource type="PackedScene" uid="uid://dytrfi7ydw34x" path="res://scenes/ball.tscn" id="7_wxvxy"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eijgw"]
 
@@ -65,6 +63,7 @@ func _on_vidas_agotadas(position):
 		new_powerUp.position.y = position.y
 		new_powerUp.scale.x = 2.5
 		new_powerUp.scale.y = 2.5
+		new_powerUp.power_up_player.connect(Callable(self, \"_on_power_up_player\"))
 		new_powerUp.tipo = get_random_power_up()
 		add_child(new_powerUp)  # Agregar el nodo como hijo
 
@@ -72,6 +71,10 @@ func get_random_power_up():
 	randomize()  # Esto asegura que obtienes un número diferente cada vez que ejecutas el juego
 	var numero = randi() % 6 # Genera un número aleatorio entre 0 y 99
 	return numero
+	
+func _on_power_up_player(tipo: int):
+	print(\"arkanoid\")
+	$Player.on_power_up_collision(tipo)
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_me4wc"]
@@ -82,12 +85,6 @@ size = Vector2(667, 66.875)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wdqc4"]
 size = Vector2(667, 39)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mgm0p"]
-radius = 5.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rur3m"]
-height = 76.0
 
 [node name="arkanoid" type="Node2D"]
 material = SubResource("CanvasItemMaterial_eijgw")
@@ -151,47 +148,14 @@ texture = ExtResource("4_punty")
 vframes = 6
 metadata/_edit_lock_ = true
 
-[node name="Ball" type="CharacterBody2D" parent="."]
-light_mask = 4
-visibility_layer = 4
-z_index = 1
-position = Vector2(563, 573)
-motion_mode = 1
-script = ExtResource("4_vrxww")
-
-[node name="BallSprite" type="Sprite2D" parent="Ball"]
-scale = Vector2(2.5, 2.5)
-texture = ExtResource("6_wje40")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
-position = Vector2(-5, -5)
-shape = SubResource("CircleShape2D_mgm0p")
-
-[node name="Player" type="CharacterBody2D" parent="."]
-z_index = 2
-position = Vector2(569, 611)
-rotation = 1.5708
-disable_mode = 2
-collision_layer = 3
-collision_mask = 3
-motion_mode = 1
-script = ExtResource("4_vat4l")
-metadata/_edit_lock_ = true
-
-[node name="VausNormal" type="Sprite2D" parent="Player"]
-position = Vector2(-22.9999, 10.0001)
-rotation = -1.5708
-scale = Vector2(2.5, 2.5)
-texture = ExtResource("5_ifetx")
-vframes = 6
-frame = 5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-27.9999, 15.0001)
-shape = SubResource("CapsuleShape2D_rur3m")
-
 [node name="BallTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="Ball" parent="." instance=ExtResource("7_wxvxy")]
+
+[node name="Player" parent="." instance=ExtResource("5_sb2yb")]
+position = Vector2(556, 588)
+speed = 1.5
 
 [connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]

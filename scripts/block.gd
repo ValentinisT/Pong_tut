@@ -1,6 +1,5 @@
 extends StaticBody2D
 
-#@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var vidas: int = 1
 signal vidas_agotadas(position)
 

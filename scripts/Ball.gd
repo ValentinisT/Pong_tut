@@ -39,7 +39,7 @@ func random_direction():
 func new_direction(collider):
 	var ball_x = position.x
 	var pad_x = collider.position.x
-	var dist = ball_x - pad_x
+	var dist = ball_x - pad_x + 8
 	var new_dir := Vector2()
 	
 	#flip the horizontal direction

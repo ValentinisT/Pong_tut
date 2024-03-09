@@ -1,0 +1,154 @@
+[gd_scene load_steps=12 format=3 uid="uid://f3a1nh650365"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_4o5i2"]
+[ext_resource type="Texture2D" uid="uid://cq35nnt5vfjbp" path="res://assets/blocks/vaus normal.png" id="2_xrm02"]
+[ext_resource type="Texture2D" uid="uid://n86nqr1d3x4s" path="res://assets/blocks/vaus extendido.png" id="3_2aavy"]
+[ext_resource type="Texture2D" uid="uid://cn7fq1olp6uxk" path="res://assets/blocks/vaus armado laser.png" id="4_27g5h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_or1yy"]
+height = 70.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2phxo"]
+height = 116.0
+
+[sub_resource type="Animation" id="Animation_s7mxv"]
+resource_name = "vaus normal"
+length = 1.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VausNormal:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 1, 2, 3, 5]
+}
+
+[sub_resource type="Animation" id="Animation_1bnp4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VausNormal:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VausExtendido:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_tndqa"]
+resource_name = "vaus grande"
+length = 1.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VausExtendido:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_06tex"]
+resource_name = "vaus a laser"
+length = 1.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VausNormal:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 1, 2, 3, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xysb0"]
+_data = {
+"RESET": SubResource("Animation_1bnp4"),
+"vaus a laser": SubResource("Animation_06tex"),
+"vaus grande": SubResource("Animation_tndqa"),
+"vaus normal": SubResource("Animation_s7mxv")
+}
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 2
+rotation = 1.5708
+disable_mode = 2
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_4o5i2")
+speed = null
+metadata/_edit_lock_ = true
+
+[node name="VausNormal" type="Sprite2D" parent="."]
+visible = false
+rotation = -1.5708
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_xrm02")
+vframes = 6
+frame = 1
+
+[node name="VausExtendido" type="Sprite2D" parent="."]
+visible = false
+rotation = -1.5708
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("3_2aavy")
+vframes = 6
+frame = 1
+
+[node name="VausArmadoLaser" type="Sprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("4_27g5h")
+vframes = 6
+
+[node name="CollisionShape2DNormal" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-4.99998, 5.00002)
+shape = SubResource("CapsuleShape2D_or1yy")
+
+[node name="CollisionShape2DExtendido" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-4.99998, 5.00002)
+shape = SubResource("CapsuleShape2D_2phxo")
+disabled = true
+
+[node name="CollisionShape2DLaser" type="CollisionShape2D" parent="."]
+position = Vector2(-4.99998, 5.00002)
+shape = SubResource("CapsuleShape2D_or1yy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xysb0")
+}
