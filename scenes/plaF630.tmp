@@ -172,18 +172,17 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-visibility_layer = 2
 z_index = 2
 rotation = 1.5708
 disable_mode = 2
-collision_mask = 7
+collision_layer = 3
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_4o5i2")
+speed = null
 metadata/_edit_lock_ = true
 
 [node name="VausNormal" type="Sprite2D" parent="."]
-visible = false
-visibility_layer = 2
 rotation = -1.5708
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_xrm02")
@@ -192,7 +191,6 @@ frame = 1
 
 [node name="VausExtendido" type="Sprite2D" parent="."]
 visible = false
-visibility_layer = 2
 rotation = -1.5708
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("3_2aavy")
@@ -200,7 +198,7 @@ vframes = 6
 frame = 1
 
 [node name="VausArmadoLaser" type="Sprite2D" parent="."]
-visibility_layer = 2
+visible = false
 rotation = -1.5708
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("4_27g5h")
@@ -208,7 +206,6 @@ vframes = 6
 
 [node name="TransformaAArma" type="Sprite2D" parent="."]
 visible = false
-visibility_layer = 2
 rotation = -1.5708
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("5_e5s0c")
@@ -217,7 +214,6 @@ frame = 1
 
 [node name="VausAnimInicio" type="Sprite2D" parent="."]
 visible = false
-visibility_layer = 2
 position = Vector2(3.8147e-06, 3.8147e-06)
 rotation = -1.5708
 scale = Vector2(2.5, 2.5)
@@ -227,20 +223,17 @@ frame = 1
 
 [node name="CollisionShape2DNormal" type="CollisionShape2D" parent="."]
 visible = false
-visibility_layer = 2
 position = Vector2(-4.99998, 5.00002)
 shape = SubResource("CapsuleShape2D_or1yy")
 
 [node name="CollisionShape2DExtendido" type="CollisionShape2D" parent="."]
 visible = false
-visibility_layer = 2
 position = Vector2(-4.99998, 5.00002)
 shape = SubResource("CapsuleShape2D_2phxo")
 disabled = true
 
 [node name="CollisionShape2DLaser" type="CollisionShape2D" parent="."]
 visible = false
-visibility_layer = 2
 position = Vector2(-4.99998, 5.00002)
 shape = SubResource("CapsuleShape2D_or1yy")
 
@@ -249,8 +242,4 @@ libraries = {
 "": SubResource("AnimationLibrary_xysb0")
 }
 
-[node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.2
-
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

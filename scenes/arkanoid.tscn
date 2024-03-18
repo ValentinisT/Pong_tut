@@ -1,5 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://begqau5pgt7v8"]
 
+[ext_resource type="Script" path="res://scenes/arkanoid.gd" id="1_7rym2"]
 [ext_resource type="Texture2D" uid="uid://wgxyis0gfg53" path="res://assets/blocks/blue background.png" id="1_tci2a"]
 [ext_resource type="Texture2D" uid="uid://bljotj4cbtmtr" path="res://assets/blocks/Arcade---Arkanoid---Blocks-&-Backgrounds.png" id="2_8den4"]
 [ext_resource type="Texture2D" uid="uid://dcayl44jlqded" path="res://assets/blocks/puerta enemigo.png" id="4_punty"]
@@ -7,75 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dytrfi7ydw34x" path="res://scenes/ball.tscn" id="7_wxvxy"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eijgw"]
-
-[sub_resource type="GDScript" id="GDScript_jdus5"]
-script/source = "extends Node2D
-
-var block = preload(\"res://scenes/block.tscn\")
-var powerUp = preload(\"res://scenes/powerUp.tscn\")
-var ball_timer_executed = false
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	Global.level1()
-	
-	for i in range(Global.filas):
-		for j in range(Global.columnas):
-			if Global.levelBlocks[i][j] < 0:
-				continue
-			var posX = 16 * 2.5 * j
-			var posY = 8 * 2.5 * i
-			var new_block = block.instantiate()  # Instanciar el nodo
-			new_block.position.x = 335 + posX # Establecer la coordenada X deseada
-			new_block.position.y = 85 + posY  # Establecer la coordenada Y deseada
-			new_block.scale.x = 2.5
-			new_block.scale.y = 2.5
-			var sprite = new_block.get_node(\"blockSprite\")  # Obtener el nodo Sprite dentro de block.tscn
-			var specialSprite = new_block.get_node(\"specialBlockSprite\")
-			new_block.vidas_agotadas.connect(Callable(self, \"_on_vidas_agotadas\"))
-			add_child(new_block)  # Agregar el nodo como hijo
-			new_block.tipo = 0
-			if Global.levelBlocks[i][j] > 7:
-				new_block.tipo = 1
-				new_block.vidas = 2
-				new_block.get_node(\"blockSprite\").hide()
-				new_block.get_node(\"specialBlockSprite\").show()
-				var val = 6
-				if Global.levelBlocks[i][j] == 9:
-					val = 0
-					new_block.tipo = 2
-				specialSprite.frame = val
-			else:
-				new_block.get_node(\"blockSprite\").show()
-				new_block.get_node(\"specialBlockSprite\").hide()
-				sprite.frame = Global.levelBlocks[i][j]
-
-func _on_ball_timer_timeout():
-	ball_timer_executed = true
-	$Ball.new_ball()
-
-func _on_vidas_agotadas(position):
-	randomize()  # Esto asegura que obtienes un número diferente cada vez que ejecutas el juego
-	var create_power_up = randi() % 2 # Genera un número aleatorio entre 0 y 99
-	if create_power_up == 1 :
-		var new_powerUp = powerUp.instantiate()  # Instanciar el nodo
-		new_powerUp.position.x = position.x
-		new_powerUp.position.y = position.y
-		new_powerUp.scale.x = 2.5
-		new_powerUp.scale.y = 2.5
-		new_powerUp.power_up_player.connect(Callable(self, \"_on_power_up_player\"))
-		new_powerUp.tipo = get_random_power_up()
-		add_child(new_powerUp)  # Agregar el nodo como hijo
-
-func get_random_power_up():
-	randomize()  # Esto asegura que obtienes un número diferente cada vez que ejecutas el juego
-	var numero = randi() % 6 # Genera un número aleatorio entre 0 y 99
-	return numero
-	
-func _on_power_up_player(tipo: int):
-	print(\"arkanoid\")
-	$Player.on_power_up_collision(tipo)
-"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_me4wc"]
 size = Vector2(72, 618.094)
@@ -88,10 +20,12 @@ size = Vector2(667, 39)
 
 [node name="arkanoid" type="Node2D"]
 material = SubResource("CanvasItemMaterial_eijgw")
-script = SubResource("GDScript_jdus5")
+script = ExtResource("1_7rym2")
 metadata/_edit_lock_ = true
 
 [node name="blueBackGround" type="Sprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
 position = Vector2(288, 48)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("1_tci2a")
@@ -99,13 +33,36 @@ centered = false
 metadata/_edit_lock_ = true
 
 [node name="door" type="Sprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
 position = Vector2(838, 598)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_8den4")
 hframes = 4
 metadata/_edit_lock_ = true
 
+[node name="PuertaEnemigo" type="Sprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(428, 58)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("4_punty")
+vframes = 6
+metadata/_edit_lock_ = true
+
+[node name="PuertaEnemigo2" type="Sprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(704, 58)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("4_punty")
+vframes = 6
+
 [node name="leftBorder" type="StaticBody2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_lock_ = true
 
 [node name="CollisionLeftBorder" type="CollisionShape2D" parent="leftBorder"]
@@ -113,6 +70,10 @@ position = Vector2(271, 339)
 shape = SubResource("RectangleShape2D_me4wc")
 
 [node name="rightBorder" type="StaticBody2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_lock_ = true
 
 [node name="CollisionRightBorder" type="CollisionShape2D" parent="rightBorder"]
@@ -120,6 +81,10 @@ position = Vector2(866, 339)
 shape = SubResource("RectangleShape2D_me4wc")
 
 [node name="topBorder" type="StaticBody2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_lock_ = true
 
 [node name="CollisionTopBorder" type="CollisionShape2D" parent="topBorder"]
@@ -128,25 +93,15 @@ position = Vector2(569.5, 33.4375)
 shape = SubResource("RectangleShape2D_j506a")
 
 [node name="BottomBorder" type="StaticBody2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+collision_layer = 2
+collision_mask = 0
 metadata/_edit_lock_ = true
 
 [node name="CollisionBottomBorder" type="CollisionShape2D" parent="BottomBorder"]
 position = Vector2(568.5, 667.5)
 shape = SubResource("RectangleShape2D_wdqc4")
-
-[node name="PuertaEnemigo" type="Sprite2D" parent="."]
-position = Vector2(428, 58)
-scale = Vector2(2.5, 2.5)
-texture = ExtResource("4_punty")
-vframes = 6
-metadata/_edit_lock_ = true
-
-[node name="PuertaEnemigo2" type="Sprite2D" parent="."]
-position = Vector2(704, 58)
-scale = Vector2(2.5, 2.5)
-texture = ExtResource("4_punty")
-vframes = 6
-metadata/_edit_lock_ = true
 
 [node name="BallTimer" type="Timer" parent="."]
 one_shot = true
@@ -156,6 +111,6 @@ autostart = true
 
 [node name="Player" parent="." instance=ExtResource("5_sb2yb")]
 position = Vector2(556, 588)
-speed = 1.5
 
 [connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
+[connection signal="create_bullet" from="Player" to="." method="_on_player_create_bullet"]
