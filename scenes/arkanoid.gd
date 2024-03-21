@@ -2,8 +2,12 @@ extends Node2D
 
 var block = preload("res://scenes/block.tscn")
 var powerUp = preload("res://scenes/powerUp.tscn")
+var ball = preload("res://scenes/ball.tscn")
 var ball_timer_executed = false
 var balas = preload("res://scenes/balas.tscn")
+var gameBall = null # Variable para almacenar la referencia a la bala
+var gameBall2 = null # Variable para almacenar la referencia a la bala
+var gameBall3 = null # Variable para almacenar la referencia a la bala
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -39,10 +43,19 @@ func _ready():
 				new_block.get_node("blockSprite").show()
 				new_block.get_node("specialBlockSprite").hide()
 				sprite.frame = Global.levelBlocks[i][j]
+	create_ball()
+
+func create_ball():
+	gameBall = ball.instantiate() # Creas la instancia de la bala
+	gameBall.position.x = 563
+	gameBall.position.y = 573
+	add_child(gameBall) # Añades la bala como hijo del nodo actual
 
 func _on_ball_timer_timeout():
 	ball_timer_executed = true
-	$Ball.new_ball()
+	if gameBall != null: # Compruebas si la bala existe
+		gameBall.new_ball() # Si existe, ejecutas la función gameBall
+
 
 func _on_vidas_agotadas(position):
 	randomize()  # Esto asegura que obtienes un número diferente cada vez que ejecutas el juego
@@ -63,7 +76,24 @@ func get_random_power_up():
 	return numero
 	
 func _on_power_up_player(tipo: int):
-	$Player.on_power_up_collision(tipo)
+	if (tipo == 5):
+		disruption()
+	else:
+		$Player.on_power_up_collision(tipo)
+		
+func create_ball_aux(rotation_degrees):
+	var gameBall = get_tree().get_nodes_in_group("balls")[0] # Obtiene el primer nodo de tipo 'ball' en el grupo 'balls'
+	var new_ball = ball.instantiate() # Creas la instancia de la bala
+	new_ball.position = gameBall.position
+	new_ball.dir = gameBall.dir.rotated(deg_to_rad(rotation_degrees)) # Rotas los grados especificados
+	new_ball.speed = gameBall.speed
+	add_child(new_ball) # Añades la bala como hijo del nodo actual
+
+func disruption():
+	create_ball_aux(5)  # Creas la primera bola rotada 5 grados
+	create_ball_aux(-5) # Creas la segunda bola rotada -5 grados
+
+
 
 func _on_player_create_bullet(posx, posy):
 	var new_bala = balas.instantiate()

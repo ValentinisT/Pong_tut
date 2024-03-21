@@ -16,12 +16,12 @@ func _ready():
 	
 func _physics_process(delta):
 	var collision = move_and_collide(dir * SPEED * delta)
-	var collider
 	if collision:
-		collider = collision.get_collider()
+		var collider = collision.get_collider()
 		if collider == $"../Player":
 			power_up_player.emit(tipo)
 		queue_free()
+
 			
 func get_power_up(power_up_type):
 	var animation_player = get_node("AnimationPlayer")

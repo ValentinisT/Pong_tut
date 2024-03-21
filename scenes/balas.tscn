@@ -8,6 +8,7 @@
 [node name="Balas" type="CharacterBody2D"]
 disable_mode = 2
 collision_layer = 8
+collision_mask = 32
 script = ExtResource("1_74lfp")
 
 [node name="BalasSprite" type="Sprite2D" parent="."]

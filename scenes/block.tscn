@@ -69,6 +69,8 @@ editor_description = "#Power-up Rarity:
 
 	#DOH:
 	#In the final level, where you face DOH himself, you should get 15 hits (1,000 points per hit) on DOH/per man until you defeat DOH with the 16th hit on your last man to end the game."
+collision_layer = 32
+collision_mask = 0
 script = ExtResource("1_ysfju")
 
 [node name="blockSprite" type="Sprite2D" parent="."]

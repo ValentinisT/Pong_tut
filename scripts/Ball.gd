@@ -17,9 +17,8 @@ func new_ball():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	var collision = move_and_collide(dir * speed * delta)
-	var collider
 	if collision:
-		collider = collision.get_collider()
+		var collider = collision.get_collider()
 		#if ball hits paddle
 		if collider == $"../Player":
 			speed += ACCEL
@@ -29,6 +28,7 @@ func _physics_process(delta):
 			dir = dir.bounce(collision.get_normal())
 		if collider.has_method("hit"):
 			collider.hit()
+
 
 func random_direction():
 	var new_dir := Vector2()

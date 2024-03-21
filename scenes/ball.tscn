@@ -6,13 +6,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2msf"]
 radius = 5.0
 
-[node name="Ball" type="CharacterBody2D"]
+[node name="Ball" type="CharacterBody2D" groups=["balls"]]
 light_mask = 4
 visibility_layer = 4
 z_index = 1
 position = Vector2(563, 573)
 collision_layer = 4
-collision_mask = 3
+collision_mask = 35
 motion_mode = 1
 script = ExtResource("1_vuf6s")
 

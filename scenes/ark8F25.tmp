@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://begqau5pgt7v8"]
+[gd_scene load_steps=11 format=3 uid="uid://begqau5pgt7v8"]
 
 [ext_resource type="Script" path="res://scenes/arkanoid.gd" id="1_7rym2"]
 [ext_resource type="Texture2D" uid="uid://wgxyis0gfg53" path="res://assets/blocks/blue background.png" id="1_tci2a"]
 [ext_resource type="Texture2D" uid="uid://bljotj4cbtmtr" path="res://assets/blocks/Arcade---Arkanoid---Blocks-&-Backgrounds.png" id="2_8den4"]
 [ext_resource type="Texture2D" uid="uid://dcayl44jlqded" path="res://assets/blocks/puerta enemigo.png" id="4_punty"]
 [ext_resource type="PackedScene" uid="uid://f3a1nh650365" path="res://scenes/player.tscn" id="5_sb2yb"]
+[ext_resource type="PackedScene" uid="uid://dytrfi7ydw34x" path="res://scenes/ball.tscn" id="7_wxvxy"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eijgw"]
 
@@ -105,6 +106,9 @@ shape = SubResource("RectangleShape2D_wdqc4")
 [node name="BallTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="Ball" parent="." instance=ExtResource("7_wxvxy")]
+visible = false
 
 [node name="Player" parent="." instance=ExtResource("5_sb2yb")]
 position = Vector2(556, 588)
