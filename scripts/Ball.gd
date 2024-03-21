@@ -12,7 +12,7 @@ func _ready():
 
 func new_ball():
 	speed = START_SPEED
-	dir = random_direction()
+	dir = original_direction()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -30,7 +30,7 @@ func _physics_process(delta):
 			collider.hit()
 
 
-func random_direction():
+func original_direction():
 	var new_dir := Vector2()
 	new_dir.y = -1
 	new_dir.x = 0.25

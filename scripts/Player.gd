@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # Velocidad de movimiento
-@export var speed: float = 1.5
+@export var speed: float = 1.7
 @onready var height: float = $CollisionShape2DNormal.get_shape().height
 signal power_up_player(tipo)
 signal create_bullet(posx,posy)
@@ -51,7 +51,7 @@ func _physics_process(_delta):
 				collider.queue_free()
 	else:
 		velocity = ZERO
-	if Input.is_action_just_pressed("shoot")  and VausArmadoLaser.visible and shootTimer.is_stopped():
+	if Input.is_action_just_pressed("shoot") and VausArmadoLaser.visible and shootTimer.is_stopped():
 		create_bullet.emit(position.x,position.y)
 		shootTimer.start() # Inicia el Timer
 

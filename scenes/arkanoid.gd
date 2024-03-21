@@ -3,11 +3,8 @@ extends Node2D
 var block = preload("res://scenes/block.tscn")
 var powerUp = preload("res://scenes/powerUp.tscn")
 var ball = preload("res://scenes/ball.tscn")
+var laser = preload("res://scenes/laser.tscn")
 var ball_timer_executed = false
-var balas = preload("res://scenes/balas.tscn")
-var gameBall = null # Variable para almacenar la referencia a la bala
-var gameBall2 = null # Variable para almacenar la referencia a la bala
-var gameBall3 = null # Variable para almacenar la referencia a la bala
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,15 +41,22 @@ func _ready():
 				new_block.get_node("specialBlockSprite").hide()
 				sprite.frame = Global.levelBlocks[i][j]
 	create_ball()
+	
+func _process(delta):
+	if not ball_timer_executed and Input.is_action_just_pressed("shoot"):
+		var ball_timer = get_node("BallTimer")
+		ball_timer.stop()
+		_on_ball_timer_timeout()
 
 func create_ball():
-	gameBall = ball.instantiate() # Creas la instancia de la bala
+	var gameBall = ball.instantiate() # Creas la instancia de la bala
 	gameBall.position.x = 563
 	gameBall.position.y = 573
 	add_child(gameBall) # Añades la bala como hijo del nodo actual
 
 func _on_ball_timer_timeout():
 	ball_timer_executed = true
+	var gameBall = get_tree().get_nodes_in_group("balls")[0]
 	if gameBall != null: # Compruebas si la bala existe
 		gameBall.new_ball() # Si existe, ejecutas la función gameBall
 
@@ -78,6 +82,9 @@ func get_random_power_up():
 func _on_power_up_player(tipo: int):
 	if (tipo == 5):
 		disruption()
+	if (tipo == 1):
+		for ball in get_tree().get_nodes_in_group("balls"):
+			ball.speed = ball.START_SPEED
 	else:
 		$Player.on_power_up_collision(tipo)
 		
@@ -93,12 +100,10 @@ func disruption():
 	create_ball_aux(5)  # Creas la primera bola rotada 5 grados
 	create_ball_aux(-5) # Creas la segunda bola rotada -5 grados
 
-
-
 func _on_player_create_bullet(posx, posy):
-	var new_bala = balas.instantiate()
+	var new_bala = laser.instantiate()
 	new_bala.scale.x = 2.5
 	new_bala.scale.y = 2.5
 	new_bala.position.x = posx - 8
-	new_bala.position.y = posy +  randi_range(-5, 0)
+	new_bala.position.y = posy +  randi_range(-20, -15)
 	add_child(new_bala)
