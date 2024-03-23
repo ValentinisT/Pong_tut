@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://1jpo05j6y4dp"]
+
+[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_jp2tu"]
+[ext_resource type="Texture2D" uid="uid://bpnc6v380ixjf" path="res://assets/blocks/blue-enemy.png" id="2_2xgkg"]
+
+[sub_resource type="Animation" id="Animation_rgshp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_8d0ic"]
+resource_name = "ball enemy"
+length = 3.3
+loop_mode = 1
+step = 0.14
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14, 0.28, 0.42, 0.56, 0.7, 0.84, 0.98, 1.12, 1.26, 1.4, 1.54, 1.68, 1.82, 1.96, 2.1, 2.24, 2.38, 2.52, 2.66, 2.8, 2.94, 3.08, 3.22),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+}
+
+[sub_resource type="Animation" id="Animation_y3utw"]
+resource_name = "blue enemy"
+length = 0.8
+loop_mode = 1
+step = 0.14
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14, 0.28, 0.42, 0.56, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 3, 4, 5, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c8hk5"]
+_data = {
+"RESET": SubResource("Animation_rgshp"),
+"ball enemy": SubResource("Animation_8d0ic"),
+"blue enemy": SubResource("Animation_y3utw")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vu4mx"]
+radius = 16.0
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_jp2tu")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(-5.96046e-08, 0)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_2xgkg")
+hframes = 8
+frame = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2(-7.10543e-15, 0)
+scale = Vector2(2.5, 2.5)
+polygon = PackedVector2Array(1.42109e-15, -9.6, -6.4, 3.2, -6.4, 6.4, -3.17442, 8.01279, 3.30539, 7.94731, 6.4, 6.4, 6.4, 3.2)
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_c8hk5")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vu4mx")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

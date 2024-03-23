@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ce7fb77s110te"
-path="res://.godot/imported/balls.png-62fd1092321b8c28d1b644fac14c3fad.ctex"
+uid="uid://bpnc6v380ixjf"
+path="res://.godot/imported/blue-enemy.png-5911815d2e8b270fd68437a004e6f30b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/blocks/balls.png"
-dest_files=["res://.godot/imported/balls.png-62fd1092321b8c28d1b644fac14c3fad.ctex"]
+source_file="res://assets/blocks/blue-enemy.png"
+dest_files=["res://.godot/imported/blue-enemy.png-5911815d2e8b270fd68437a004e6f30b.ctex"]
 
 [params]
 

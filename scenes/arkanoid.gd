@@ -4,11 +4,12 @@ var block = preload("res://scenes/block.tscn")
 var powerUp = preload("res://scenes/powerUp.tscn")
 var ball = preload("res://scenes/ball.tscn")
 var laser = preload("res://scenes/laser.tscn")
+var enemy = preload("res://scenes/enemy.tscn")
 var ball_timer_executed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Global.level1()
+	Global.level2()
 	
 	for i in range(Global.filas):
 		for j in range(Global.columnas):
@@ -41,6 +42,18 @@ func _ready():
 				new_block.get_node("specialBlockSprite").hide()
 				sprite.frame = Global.levelBlocks[i][j]
 	create_ball()
+	#enemigos deshabilitados de momento para no hacer path finding
+	#var ene = enemy.instantiate() # Creas la instancia de la bala
+	#ene.position.x = 563 + 100
+	#ene.position.y = 573
+	#ene.get_blue_enemy()
+	#add_child(ene) # Añades la bala como hijo del nodo actual
+	#
+	#var ene2 = enemy.instantiate() # Creas la instancia de la bala
+	#ene2.position.x = 563 + 200
+	#ene2.position.y = 573
+	#ene2.get_ball_enemy()
+	#add_child(ene2) # Añades la bala como hijo del nodo actual
 	
 func _process(delta):
 	if not ball_timer_executed and Input.is_action_just_pressed("shoot"):
@@ -51,7 +64,7 @@ func _process(delta):
 func create_ball():
 	var gameBall = ball.instantiate() # Creas la instancia de la bala
 	gameBall.position.x = 563
-	gameBall.position.y = 573
+	gameBall.position.y = 589
 	add_child(gameBall) # Añades la bala como hijo del nodo actual
 
 func _on_ball_timer_timeout():
