@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://1jpo05j6y4dp"]
+[gd_scene load_steps=13 format=3 uid="uid://1jpo05j6y4dp"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_pudnj"]
-[ext_resource type="Texture2D" uid="uid://bpnc6v380ixjf" path="res://assets/blocks/blue-enemy.png" id="2_2xgkg"]
+[ext_resource type="Texture2D" uid="uid://cknus50o50jo8" path="res://assets/blocks/red-enemy.png" id="3_5abrr"]
 
 [sub_resource type="Animation" id="Animation_rgshp"]
 length = 0.001
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -54,27 +55,114 @@ tracks/0/keys = {
 "values": [0, 1, 3, 4, 5, 7]
 }
 
+[sub_resource type="Animation" id="Animation_wdnkv"]
+resource_name = "green enemy"
+length = 1.98
+loop_mode = 1
+step = 0.18
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.18, 0.36, 0.54, 0.72, 0.9, 1.08, 1.26, 1.44, 1.62, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_njhut"]
+resource_name = "red enemy"
+length = 2.2
+loop_mode = 2
+step = 0.22
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.22, 0.44, 0.66, 0.88, 1.1, 1.32, 1.54, 1.76, 1.98),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c8hk5"]
 _data = {
 "RESET": SubResource("Animation_rgshp"),
 "ball enemy": SubResource("Animation_8d0ic"),
-"blue enemy": SubResource("Animation_y3utw")
+"blue enemy": SubResource("Animation_y3utw"),
+"green enemy": SubResource("Animation_wdnkv"),
+"red enemy": SubResource("Animation_njhut")
+}
+
+[sub_resource type="Animation" id="Animation_ji4dh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_iq3i2"]
+resource_name = "red enemy"
+length = 2.0
+loop_mode = 2
+step = 0.22
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.22, 0.44, 0.66, 0.88, 1.1, 1.32, 1.54, 1.76),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bodtq"]
+_data = {
+"RESET": SubResource("Animation_ji4dh"),
+"red enemy": SubResource("Animation_iq3i2")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vu4mx"]
 radius = 16.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+editor_description = "rojo: busca descender todo lo que puede
+globo: mismo que rojo + voltereta
+azul y verde: llegan hasta la mitad y luego hacen una o 2 volteretas especiales"
+light_mask = 32
+visibility_layer = 55
+collision_layer = 32
+collision_mask = 47
+motion_mode = 1
+wall_min_slide_angle = 0.0
+platform_wall_layers = 1
 script = ExtResource("1_pudnj")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
 light_mask = 4
 visibility_layer = 4
-position = Vector2(-5.96046e-08, 0)
+position = Vector2(-1.19209e-07, -1.19209e-07)
 scale = Vector2(2.5, 2.5)
-texture = ExtResource("2_2xgkg")
-hframes = 8
-frame = 1
+texture = ExtResource("3_5abrr")
+hframes = 5
+vframes = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
@@ -83,12 +171,18 @@ scale = Vector2(2.5, 2.5)
 polygon = PackedVector2Array(1.42109e-15, -9.6, -6.4, 3.2, -6.4, 6.4, -3.17442, 8.01279, 3.30539, 7.94731, 6.4, 6.4, 6.4, 3.2)
 disabled = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayerLoop" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_c8hk5")
+}
+
+[node name="AnimationPlayerGoAndReturn" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bodtq")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vu4mx")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true

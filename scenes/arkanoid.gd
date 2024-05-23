@@ -42,18 +42,48 @@ func _ready():
 				new_block.get_node("specialBlockSprite").hide()
 				sprite.frame = Global.levelBlocks[i][j]
 	create_ball()
-	#enemigos deshabilitados de momento para no hacer path finding
-	#var ene = enemy.instantiate() # Creas la instancia de la bala
-	#ene.position.x = 563 + 100
-	#ene.position.y = 573
-	#ene.get_blue_enemy()
-	#add_child(ene) # Añades la bala como hijo del nodo actual
-	#
-	#var ene2 = enemy.instantiate() # Creas la instancia de la bala
-	#ene2.position.x = 563 + 200
-	#ene2.position.y = 573
-	#ene2.get_ball_enemy()
-	#add_child(ene2) # Añades la bala como hijo del nodo actual
+	
+	var timer := Timer.new()
+	timer.wait_time = 1.0 # 1 second
+	timer.one_shot = true # don't loop, run once
+	timer.autostart = true # start timer when added to a scene
+	timer.timeout.connect(Callable(self, "_on_timer_timeout_funcname"))
+	add_child(timer)
+
+#esto no funciona aun
+func _on_timer_timeout_funcname():
+	randomize()  # Esto asegura que obtienes un número diferente cada vez que ejecutas el juego
+	open_gate_and_create_enemy(randi() % 2)
+	
+func open_gate_and_create_enemy(gate:int):
+	var animation = self.get_node("AnimationPlayer")
+	var anim_name = ""
+	if(gate == 0):
+		anim_name = "open left enemy door"
+	else:
+		anim_name = "open right enemy door"
+	animation.play(anim_name)
+	
+func _on_animation_player_animation_finished(anim_name):
+	var animation = self.get_node("AnimationPlayer")
+	if (anim_name == "open left enemy door"):
+		create_enemy("left")
+		animation.play("close left enemy door")
+	if (anim_name == "open right enemy door"):
+		create_enemy("right")
+		animation.play("close right enemy door")
+		
+func create_enemy(door:String):
+	var ene = enemy.instantiate()
+	var pos = Vector2()
+	if(door == "left"):
+		pos = Vector2(429, 66)
+	else:
+		pos = Vector2(708, 66)
+		
+	ene.position = pos
+	ene.get_blue_enemy()
+	add_child(ene)
 	
 func _process(delta):
 	if not ball_timer_executed and Input.is_action_just_pressed("shoot"):
@@ -89,7 +119,7 @@ func _on_vidas_agotadas(position):
 
 func get_random_power_up():
 	randomize()  # Esto asegura que obtienes un número diferente cada vez que ejecutas el juego
-	var numero = randi() % 6 # Genera un número aleatorio entre 0 y 99
+	var numero = randi() % 6
 	return numero
 	
 func _on_power_up_player(tipo: int):

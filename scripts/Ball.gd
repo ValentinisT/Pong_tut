@@ -28,6 +28,8 @@ func _physics_process(delta):
 			dir = dir.bounce(collision.get_normal())
 		if collider.has_method("hit"):
 			collider.hit()
+		if collider.is_in_group("enemy"):
+			collider.destroy(true)
 
 
 func original_direction():

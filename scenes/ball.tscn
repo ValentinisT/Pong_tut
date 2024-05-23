@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2msf"]
 radius = 5.0
 
-[node name="Ball" type="CharacterBody2D" groups=["balls"]]
+[node name="Ball" type="CharacterBody2D" groups=["balls", "destroysEnemy"]]
 light_mask = 4
 visibility_layer = 4
 z_index = 1
